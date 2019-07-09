@@ -8159,3 +8159,6 @@ License - nucleoapp.com/license/
 .profile-content{
   background: #edf2f6;
 }
+.card{
+  box-shadow: 0px 12px 19px -7px rgba(0, 0, 0, 0.3);
+}
