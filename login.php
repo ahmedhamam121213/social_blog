@@ -7,12 +7,12 @@
         <div class="col-lg-4 ml-auto mr-auto">
           <div class="card card-register">
             <h3 class="title mx-auto">Welcome</h3>
-            <form class="register-form">
+            <form class="register-form" action="home.php" method="post" enctype="multipart/form-data" >
               <label>Username</label>
-              <input type="text" class="form-control" placeholder="Username">
+              <input type="text" class="form-control" placeholder="Username" name="username">
               <label>Password</label>
-              <input type="password" class="form-control" placeholder="Password">
-              <button type="submit" name="submit" class="btn btn-danger btn-block btn-round">Login</button>
+              <input type="password" class="form-control" placeholder="Password" name="password">
+              <input class="btn btn-danger btn-block btn-round" type="submit" name="submit" >
             </form>
            
           </div>

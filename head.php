@@ -35,9 +35,22 @@
       </div>
       <div class="collapse navbar-collapse justify-content-end" id="navigation">
         <ul class="navbar-nav">
-          <!-- <li class="nav-item">
-            <a href="#" target="_blank" class="nav-link"> Documentation</a>
-          </li> -->
+          <?php if( isset($_POST['submit']) ){ ?>
+           <li class="nav-item">
+            <a href="#" target="_blank" class="nav-link"> Welcome <?php echo $_POST['username']; ?></a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" target="_blank" class="nav-link"> View Profile</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" target="_blank" class="nav-link"> Other Posts</a>
+          </li>
+         
+            
+             <?php }  ?>
+         
         </ul>
       </div>
     </div>
