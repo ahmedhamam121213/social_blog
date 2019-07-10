@@ -1,5 +1,17 @@
 
-<?php require_once("head.php"); ?>
+<?php 
+//connection of data base
+$db = new PDO("mysql:host=localhost;dbname=social_blog", "root", "" , array(PDO::MYSQL_ATTR_INIT_COMMAND =>  "SET NAMES 'UTF8'") );
+$username = $_POST['username'];
+$password = $_POST['password'];
+//fetch info of logged user
+
+$sql =  $db->prepare(" SELECT * from users WHERE username = \"$username\"  and password = \"$password\" ");
+$myResult = $sql->execute();
+$foundUser = $sql->fetchAll() ;
+$foundUser =  array_shift($foundUser);
+require_once("head.php");
+?>
   <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('assets/img/fabio-mangione.jpg');">
     <div class="filter"></div>
   </div>
@@ -7,7 +19,7 @@
     <div class="container">
       <div class="owner">
         <div class="avatar">
-          <img src="assets/img/faces/joe-gardner-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+          <img src="<?php echo $foundUser['image_url']; ?>" alt="Circle Image" class="img-circle img-no-padding img-responsive">
         </div>
         <div class="name">
           <h4 class="title"><?php if( isset( $_POST['submit'] ) ){ echo $_POST['username']; } ?>
