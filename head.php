@@ -50,10 +50,6 @@
           </li>
 
           <li class="nav-item">
-            <a href="user.php?action=add" target="_blank" class="nav-link"> add user</a>
-          </li>
-
-          <li class="nav-item">
             <a href="user.php" target="_blank" class="nav-link"> list users</a>
           </li>
          
