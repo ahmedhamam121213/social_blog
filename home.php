@@ -1,7 +1,9 @@
 
 <?php 
 session_start();
-//connection of data base
+if( isset($_SESSION['id']) ){
+
+  //connection of data base
 $db = new PDO("mysql:host=localhost;dbname=social_blog", "root", "" , array(PDO::MYSQL_ATTR_INIT_COMMAND =>  "SET NAMES 'UTF8'") );
 
 //fetch info of logged user
@@ -96,4 +98,8 @@ require_once("head.php");
       
     </div>
   </div>
-  <?php require_once("footer.php"); ?>
+  <?php require_once("footer.php");
+
+}else{
+  header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/login.php ');
+}

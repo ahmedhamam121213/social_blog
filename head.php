@@ -24,7 +24,7 @@
   <nav class="navbar navbar-expand-lg fixed-top navbar-transparent " color-on-scroll="300">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="home.php?action=view&id=<?php echo $_SESSION['id']; ?>" rel="tooltip" title="Coded by Creative Tim" data-placement="bottom" target="_blank">
+        <a class="navbar-brand" href="home.php?action=view&id=<?php echo $_SESSION['id']; ?>" rel="tooltip" title="Coded by Creative Tim" data-placement="bottom" >
           Blog System
         </a>
         <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,20 +37,24 @@
         <ul class="navbar-nav">
           
            <li class="nav-item">
-            <a href="#" target="_blank" class="nav-link"> Welcome 
+            <a href="#"  class="nav-link"> Welcome 
             <?php if ( isset( $foundUser['username'] ) ){ $foundUser['username']; }  ?></a>
           </li>
 
           <li class="nav-item">
-            <a href="#" target="_blank" class="nav-link"> View Profile</a>
+            <a href="#"  class="nav-link"> View Profile</a>
           </li>
 
           <li class="nav-item">
-            <a href="otherPosts.php?action=view&id=<?php echo $_SESSION['id']; ?>" target="_blank" class="nav-link"> Other Posts</a>
+            <a href="otherPosts.php?action=view&id=<?php echo $_SESSION['id']; ?>"  class="nav-link"> Other Posts</a>
           </li>
 
           <li class="nav-item">
-            <a href="user.php" target="_blank" class="nav-link"> list users</a>
+            <a href="user.php" class="nav-link"> list users</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="logout.php" class="nav-link"> logout</a>
           </li>
          
             
