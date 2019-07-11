@@ -40,7 +40,7 @@ require_once("head.php");
                 <i class="nc-icon nc-simple-remove"></i>
                 </button>
                 <span style="font-size: 20px;font-weight: 400;"
-                ><?php  echo $_SESSION['messege']; $_SESSION['messege']="";  ?> </span>
+                ><?php  echo $_SESSION['messege'];?> </span>
             </div>
             </div>
         </h4>
