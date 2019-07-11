@@ -55,7 +55,7 @@ require_once("head.php");
                 </ul>
                 <div class="card-body">
                   <a href="addPost.php?action=edit&id=<?php echo $post['id']; ?>" class="card-link">Edit Post</a>
-                  <a href="#" class="card-link">Delete Post</a>
+                  <a href="?action=delete&id=<?php echo $post['id']; ?>" class="card-link" onclick="return confirm('Are you sure you want to delete this item?');">Delete Post</a>
                 </div>
               </div>
               <!--end blog post-->
@@ -78,9 +78,16 @@ require_once("head.php");
       <!--start edit blog post-->
 
       <!--start edit blog post-->
-      <?php if( isset( $_GET['action'] )  && $_GET['action']== 'delete' ){ ?>
-      <h4>delete</h4>  
-      <?php } ?>  
+      <?php if( isset( $_GET['action'] )  && $_GET['action']== 'delete' ){
+       $id = $_GET['id'];
+  
+       if( $id >= 0  ){
+     
+         $sql =$db->prepare(" DELETE FROM posts WHERE id = :id ");
+         $sql->execute( array( ":id" => $id ) );
+         $_SESSION['messege']  = "post has been deleted successfully";
+         header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/home.php?action=view');
+      }} ?>  
       <!--start edit blog post-->
 
      

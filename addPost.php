@@ -95,8 +95,13 @@ if( isset($_POST['edit-post']) ){
   if( $sql ){
 
 
-    $_SESSION['messege']  = "user has been updated Sussecfully";
-    header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/home.php?action=view');
+    $_SESSION['messege']  = "post has been updated Sussecfully";
+    if( $foundPost['user_id'] == $id ){
+      header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/home.php?action=view');
+    }else{
+      header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/otherPosts.php?action=view');
+    }
+    
   }else{
     echo  $_SESSION['messege'] = "something went wrong";
   }

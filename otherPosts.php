@@ -31,6 +31,22 @@ require_once("head.php");
 
       <!--start view blog posts-->
       <?php if( isset( $_GET['action'] )  && $_GET['action']== 'view' ){ ?>
+        <!--if new user saved message will appeear-->
+        <?php if( isset( $_SESSION['messege'] ) ){ ?>
+        <h4 class="text-center">
+            <div class="alert alert-success">
+            <div class="container">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="nc-icon nc-simple-remove"></i>
+                </button>
+                <span style="font-size: 20px;font-weight: 400;"
+                ><?php  echo $_SESSION['messege']; $_SESSION['messege']="";  ?> </span>
+            </div>
+            </div>
+        </h4>
+        <?php } ?>
+        <!--if new user saved message will appeear-->
+
         <a href="addPost.php?action=add" class="btn btn-primary"> Add Post </a><br><br><br>
          <!--start fetch post of user-->
         <?php
@@ -55,7 +71,7 @@ require_once("head.php");
                 </ul>
                 <div class="card-body">
                   <a href="addPost.php?action=edit&id=<?php echo $post['id']; ?>" class="card-link">Edit Post</a>
-                  <a href="#" class="card-link">Delete Post</a>
+                  <a href="?action=delete&id=<?php echo $post['id']; ?>" class="card-link" onclick="return confirm('Are you sure you want to delete this item?');">Delete Post</a>
                 </div>
               </div>
               <!--end blog post-->
@@ -78,9 +94,17 @@ require_once("head.php");
       <!--start edit blog post-->
 
       <!--start edit blog post-->
-      <?php if( isset( $_GET['action'] )  && $_GET['action']== 'delete' ){ ?>
-      <h4>delete</h4>  
-      <?php } ?>  
+      <?php if( isset( $_GET['action'] )  && $_GET['action']== 'delete' ){
+        $id = $_GET['id'];
+  
+        if( $id >= 0  ){
+      
+          $sql =$db->prepare(" DELETE FROM posts WHERE id = :id ");
+          $sql->execute( array( ":id" => $id ) );
+          $_SESSION['messege']  = "post has been deleted successfully";
+          header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/otherPosts.php?action=view');
+       }}    
+      ?>  
       <!--start edit blog post-->
 
      
