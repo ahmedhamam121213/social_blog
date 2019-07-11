@@ -48,7 +48,8 @@ $users = $sql->fetchAll() ;
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <i class="nc-icon nc-simple-remove"></i>
         </button>
-        <span style="font-size: 20px;font-weight: 400;"><?php  echo $_SESSION['messege'];  ?> </span>
+        <span style="font-size: 20px;font-weight: 400;"
+        ><?php  echo $_SESSION['messege']; $_SESSION['messege']=""  ?> </span>
       </div>
     </div>
   </h4>
