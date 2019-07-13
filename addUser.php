@@ -5,6 +5,13 @@ if( isset($_SESSION['id']) ){
 
 //connection of data base
 $db = new PDO("mysql:host=localhost;dbname=social_blog", "root", "" , array(PDO::MYSQL_ATTR_INIT_COMMAND =>  "SET NAMES 'UTF8'") );
+
+//fetch info of logged user
+$sql =  $db->prepare(" SELECT * from users WHERE id = " . $_SESSION['id'] );
+$myResult = $sql->execute();
+$foundUser = $sql->fetchAll() ;
+$foundUser =  array_shift($foundUser);
+
 //add user
 if(  isset( $_POST['Add-user'] )  ){
   $username = $_POST['username'];

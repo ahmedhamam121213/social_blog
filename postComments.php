@@ -17,7 +17,7 @@ if( isset($_SESSION['id']) ){
       <div class="filter"></div>
     </div>
 
-    <div class="section profile-content">
+    <div class="section profile-content" style="background:#fff">
         <div class="container">
             <div class="owner">
                 <div class="avatar">
@@ -31,11 +31,8 @@ if( isset($_SESSION['id']) ){
                 </h4>
             
             </div>
-        </div>
-    </div>    
-
-  
-  <!--start edit post-->
+            
+             <!--start edit post-->
   <?php if( isset( $_GET['action'] )  && $_GET['action'] == 'view' && isset( $_GET['postId'] ) ){ ?>
     <!--start fetch data by id-->
     <?php 
@@ -44,32 +41,68 @@ if( isset($_SESSION['id']) ){
     $myResult = $sql->execute();
     $foundPost = $sql->fetchAll() ;
     $foundPost =  array_shift($foundPost);
-    echo "<pre>";
-    print_r($foundPost);
-    echo "</pre>";
+    
 
     
 
-    echo "<h1>comments details</h1>";
+    
       $commentsDetails = $db->prepare(" SELECT users.image_url as image , users.username as user , comments.title as comment FROM users JOIN comments ON comments.user_id = users.id 
         WHERE comments.post_id = \"$postId\" " );
      $result = $commentsDetails->execute();
     $details = $commentsDetails->fetchAll();
     
 
-    foreach ($details as $record) {
-      echo "<p>imgUrl = <b>" .$record['image']. "</b><p>";
-      echo "<p>imgUrl = <b>" .$record['user']. "</b><p>";
-      echo "<p>imgUrl = <b>" .$record['comment']. "</b><p>";
-      echo "<hr>";
-    }
+
     ?>
+            
+    <div class="row post-comments">
+      <!--start comments side-->
+      <div class="col-md-8">
+        <div><img src="<?php echo $foundPost['picture_url']; ?>" style="width:100%" ></div>
+        <h4><?php echo $foundPost['title']; ?></h4>
+        <p><?php echo $foundPost['body']; ?></p>
+        <h3> 6 Comments </h3>
+
+        <?php
+           foreach ($details as $record) {
+             echo '<div class="comment-body">';
+             echo '<div class="image">';
+             echo "<img src = ".$record['image']." >";
+             echo '</div>';
+             echo '<div class="desc">';
+             echo '<h5 class="name">'.$record['user'].'</h5>';
+             echo '<p class="comment">'.$record['comment'].'</p>';
+             echo '</div>';
+             echo '</div>';
+             echo '<hr style="margin-top:40px;margin-bottom:40px;">';
+           }
+        ?>
+        
+        
+
+
+      </div>  
+
+      
+
+      <!--end comments side-->   
+
+      <!--start profile side-->
+      <div class="col-md-4">profile</div>  
+      <!--end profile side--> 
+
+    </div>        
 
 
     <!--end fetch data by id-->
 
   <?php } ?>
   <!--start edit post-->
+        </div>
+    </div>    
+
+  
+ 
   <?php require_once("footer.php"); 
 
 }else{
