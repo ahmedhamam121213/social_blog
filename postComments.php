@@ -88,12 +88,21 @@ if( isset($_SESSION['id']) ){
       <!--end comments side-->   
 
       <!--start profile side-->
+      <?php
+      
+      $sql = $db->prepare(" SELECT users.image_url as image , users.username as user FROM users JOIN posts ON posts.user_id = users.id 
+        WHERE posts.id = \"$postId\" " );
+    $myResult = $sql->execute();
+    $foundProfile = $sql->fetchAll() ;
+    $foundProfile =  array_shift($foundProfile);
+    
+      ?>
       <div class="col-md-4">
            <div class="profile-post">
               <div class="image">
-                <img src="https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"> 
+                <img src="<?php echo $foundProfile['image']; ?>"> 
               </div>
-              <h4><b>Calvin David</b></h4>
+              <h4><b><?php echo $foundProfile['user']; ?></b></h4>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem facilis sunt repellendus excepturi beatae porro debitis voluptate nulla quo veniam fuga sit molestias minus.</p>
               <a href="#" class="btn btn-primary" >View Profile</a>
            </div>

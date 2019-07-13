@@ -64,9 +64,25 @@ require_once("head.php");
             <div class="card" >
               <img class="card-img-top" src="<?php echo $post['picture_url']; ?>" alt="Card image cap">
               <div class="card-body comment-container">
-                <h5 style="font-weight:500" class="card-title"><?php echo $post['title']; ?></h5>
+              <?php //fix big strength of body 
+                  if( strlen( $post['title'] ) > 70 ){
+                    $title = substr( $post['title'] ,0 , 70 ) . '..........' ; 
+                      
+                  }else{
+                    $title = $post['title'];
+                  } ?>
+                <h5 style="font-weight:500" class="card-title"><?php echo $title;
+               
+                 //fix big strength of body 
+                  if( strlen( $post['body'] ) > 70 ){
+                    $body = substr( $post['body'] ,0 , 70 ) . '..........' ; 
+                      
+                  }else{
+                    $body = $post['body'];
+                  } ?></h5>
                 
-                <p class="card-text"><?php echo $post['body']; ?></p>
+                
+                <p class="card-text"><?php echo $body  ; ?></p>
                   <!--start require comments.php-->
                   <?php require_once("comments.php"); ?>
                   <!--end require comments.php-->
@@ -82,9 +98,10 @@ require_once("head.php");
                     $lastComment = $comments[count($comments) - 1]['title'];
                     
                     if( strlen($lastComment) > 17 ){
-                       $lastComment = substr( $lastComment , 0 , -15 ) . '...' ; 
+                       $lastComment = substr( $lastComment , 0 , 17 ) . '...' ; 
                         
                     }
+                    
                     $lastId = $comments[count($comments) - 1]['user_id'];
                     //start fetch image url of the comment of user
                    $sql = $db->prepare("SELECT users.image_url FROM users JOIN comments ON comments.user_id = users.id WHERE comments.title = \"$lastComment\" AND comments.user_id = $lastId " );
@@ -119,7 +136,7 @@ require_once("head.php");
                 <?php  if( isset( $count ) ){ echo $count . " Comment";} ?></a></p>
               </div>
                 <div class="card-body new_anchor_style">
-                <a href="comments.php?postId=<?php echo $post['id'] ?>&action=add" class="card-link">Comment</a>
+                <a href="addPost.php?action=edit&id=<?php echo $post['id']; ?>" class="card-link">View</a>
                 <a href="addPost.php?action=edit&id=<?php echo $post['id']; ?>" class="card-link">Edit</a>
                 <a href="?action=delete&id=<?php echo $post['id']; ?>" class="card-link" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
               </div>
