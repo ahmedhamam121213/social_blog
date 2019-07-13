@@ -88,7 +88,16 @@ if( isset($_SESSION['id']) ){
       <!--end comments side-->   
 
       <!--start profile side-->
-      <div class="col-md-4">profile</div>  
+      <div class="col-md-4">
+           <div class="profile-post">
+              <div class="image">
+                <img src="https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"> 
+              </div>
+              <h4><b>Calvin David</b></h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem facilis sunt repellendus excepturi beatae porro debitis voluptate nulla quo veniam fuga sit molestias minus.</p>
+              <a href="#" class="btn btn-primary" >View Profile</a>
+           </div>
+      </div>  
       <!--end profile side--> 
 
     </div>        

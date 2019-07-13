@@ -64,8 +64,16 @@ require_once("head.php");
             <div class="card" >
               <img class="card-img-top" src="<?php echo $post['picture_url']; ?>" alt="Card image cap">
               <div class="card-body comment-container">
-                <h5 style="font-weight:500" class="card-title"><?php echo $post['title'];
+              <?php //fix big strength of body 
+                  if( strlen( $post['title'] ) > 70 ){
+                    $title = substr( $post['title'] ,0 , 70 ) . '..........' ; 
+                      
+                  }else{
+                    $title = $post['title'];
+                  } ?>
+                <h5 style="font-weight:500" class="card-title"><?php echo $title;
                
+                 //fix big strength of body 
                   if( strlen( $post['body'] ) > 70 ){
                     $body = substr( $post['body'] ,0 , 70 ) . '..........' ; 
                       
@@ -90,7 +98,7 @@ require_once("head.php");
                     $lastComment = $comments[count($comments) - 1]['title'];
                     
                     if( strlen($lastComment) > 17 ){
-                       $lastComment = substr( $lastComment , 0 , -15 ) . '...' ; 
+                       $lastComment = substr( $lastComment , 0 , 17 ) . '...' ; 
                         
                     }
                     
