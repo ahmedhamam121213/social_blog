@@ -57,9 +57,9 @@ if( $count != 0 ){
             <h3 class="title mx-auto">Social Blog</h3>
             <form class="register-form"  method="post" enctype="multipart/form-data" >
               <label>Username</label>
-              <input type="text" class="form-control" placeholder="Username" name="username">
+              <input type="text" class="form-control" placeholder="Username" name="username" value="ahmed">
               <label>Password</label>
-              <input type="password" class="form-control" placeholder="Password" name="password">
+              <input type="password" class="form-control" placeholder="Password" name="password" value="123456">
               <input class="btn btn-danger btn-block btn-round" type="submit" name="submit" >
               <br>
               <?php if( isset($errorMsg) ){ echo "<p class='text-center'><b>" .$errorMsg. "</b></p>"; } ?>

@@ -59,7 +59,7 @@ require_once("head.php");
           
         <div class="row">
           <?php foreach( $postsResult as $post ){ ?>
-          <div class="col-md-4">
+          <div class="col-md-4 post-container">
             <!--start blog post-->
             <div class="card" >
               <img class="card-img-top" src="<?php echo $post['picture_url']; ?>" alt="Card image cap">

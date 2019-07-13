@@ -8165,7 +8165,7 @@ License - nucleoapp.com/license/
   margin-bottom: 40px;
 }
 .card a:not(.btn){
-      padding: 0 7% 0 0;
+      padding: 0 7%;
 }
 .comment-number{
   padding: 0;
@@ -8176,6 +8176,7 @@ License - nucleoapp.com/license/
 .new_anchor_style{
     border-top: 1px solid #ddd;
     padding: 10px 20px !important;
+    text-align: center;
 }
 .new_anchor_style a{
    color: #000 !important;
@@ -8187,6 +8188,11 @@ License - nucleoapp.com/license/
 }
 @media (max-width: 768px) {
   .btn.btn-primary{ display: block; }
+}
+@media (max-width: 600px) {
+  .btn.btn-primary{ display: block; }
+  .card img{ border-radius: 0 }
+  .post-container{padding-left: 0;padding-right: 0}
 }
 .down-arrow {
   border-color: #51cbce transparent;
