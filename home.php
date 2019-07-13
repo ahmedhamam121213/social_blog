@@ -80,9 +80,20 @@ require_once("head.php");
                   
                   if( count($comments) > 0 ){
                     $lastComment = $comments[count($comments) - 1]['title'];
+                    
                     if( strlen($lastComment) > 17 ){
                        $lastComment = substr( $lastComment , 0 , -15 ) . '...' ; 
+                        
                     }
+                    $lastId = $comments[count($comments) - 1]['user_id'];
+                    //start fetch image url of the comment of user
+                   $sql = $db->prepare("SELECT users.image_url FROM users JOIN comments ON comments.user_id = users.id WHERE comments.title = \"$lastComment\" AND comments.user_id = $lastId " );
+                       $myResult = $sql->execute();
+                        $foundPost = $sql->fetchAll() ;
+                        $foundPost =  array_shift($foundPost);
+                    
+                   
+                      
                     echo "<div style='position:relative'>";
                     echo "<p class='btn btn-info btn-round' 
                     style='text-transform: lowercase;
@@ -93,7 +104,7 @@ require_once("head.php");
                     width: 80%;
                     text-align:left;
                     font-size: 15px;'>";
-                    echo "<img src='https://images.pexels.com/photos/159599/baby-eyes-learning-watch-159599.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' class='img-comment'>";          
+                    echo "<img src=".$foundPost['image_url']." class='img-comment'>";          
                     echo $lastComment. "</p>";
                     echo "<span class='down-arrow'></span>";
                     echo "</div>";
@@ -108,7 +119,7 @@ require_once("head.php");
                 <?php  if( isset( $count ) ){ echo $count . " Comment";} ?></a></p>
               </div>
                 <div class="card-body new_anchor_style">
-                <a href="comments.php?postId=<?php echo $post['id'] ?>&action=add" class="card-link">Comment</a>
+                <a href="addPost.php?action=edit&id=<?php echo $post['id']; ?>" class="card-link">View</a>
                 <a href="addPost.php?action=edit&id=<?php echo $post['id']; ?>" class="card-link">Edit</a>
                 <a href="?action=delete&id=<?php echo $post['id']; ?>" class="card-link" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
               </div>

@@ -158,7 +158,53 @@ $foundUser =  array_shift($foundUser);
       </div>
     </div>
   <?php } ?>
-  <!--start edit post-->
+  <!--end edit post-->
+
+  <!--start view post-->
+  <?php if( isset( $_GET['action'] )  && $_GET['action'] == 'view' && isset( $_GET['id'] ) ){ ?>
+    <!--start fetch data by id-->
+    <?php 
+    $id = $_GET['id'];
+    $sql =  $db->prepare(" SELECT * from posts WHERE id = \"$id\"  ");
+    $myResult = $sql->execute();
+    $foundPost = $sql->fetchAll() ;
+    $foundPost =  array_shift($foundPost);
+    ?>
+    <!--end fetch data by id-->
+    <div class="main">
+      <div class="section landing-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+              <h2 class="text-center">View Post Details</h2>
+              <form class="contact-form" method="post" enctype="multipart/form-data">
+                <div class="row">
+                  <div class="col-md-12">
+                    <label>Title</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        
+                          <!-- <i class="nc-icon nc-single-02"></i> -->
+                        </span>
+                      </div>
+                      <input disabled type="text" name="title" class="form-control" placeholder="Title" required value="<?php if( isset( $foundPost['title'] ) ){ echo $foundPost['title']; } ?>">
+                    </div>
+                  </div>
+                </div>
+                <label>Body</label>
+                <textarea disabled class="form-control" name="body" rows="4" placeholder="Type Your description" required><?php if( isset( $foundPost['body'] ) ){ echo $foundPost['body']; } ?></textarea>
+                
+                <label>Picture URL</label>
+                <textarea disabled class="form-control" name="picture_url" rows="4" placeholder="Type Your Picture URL" required><?php if( isset( $foundPost['picture_url'] ) ){ echo $foundPost['picture_url']; } ?></textarea>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php } ?>
+  <!--end view post-->
   <?php require_once("footer.php"); 
 
 }else{
