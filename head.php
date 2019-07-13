@@ -37,12 +37,15 @@
         <ul class="navbar-nav">
           
            <li class="nav-item">
-            <a href="#"  class="nav-link"> Welcome 
-            <?php if ( isset( $foundUser['username'] ) ){ $foundUser['username']; }  ?></a>
+            <a href="home.php?action=view&id=<?php echo $_SESSION['id']; ?>"  class="nav-link"> Welcome <?php echo $foundUser['username']; ?></a>
           </li>
 
           <li class="nav-item">
-            <a href="#"  class="nav-link"> View Profile</a>
+            <a href="editUser.php?action=view&id=<?php echo $_SESSION['id']; ?>"  class="nav-link"> View Profile</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="editUser.php?action=edit&id=<?php echo $_SESSION['id']; ?>"  class="nav-link"> Edit Profile</a>
           </li>
 
           <li class="nav-item">

@@ -6,12 +6,18 @@ if( isset($_SESSION['id']) ){
   $user_id = $_SESSION['id'];
   //connection of data base
   $db = new PDO("mysql:host=localhost;dbname=social_blog", "root", "" , array(PDO::MYSQL_ATTR_INIT_COMMAND =>  "SET NAMES 'UTF8'") );
+  //fetch info of logged user
+
+$sql =  $db->prepare(" SELECT * from users WHERE id = " . $_SESSION['id'] );
+$myResult = $sql->execute();
+$foundUser = $sql->fetchAll() ;
+$foundUser =  array_shift($foundUser);
   //add user
   if(  isset( $_POST['Add-post'] )  ){
     $title = $_POST['title'];
     $body = $_POST['body'];
   
-    $sql =  $db->prepare( " INSERT INTO posts ( title , body , created ,  user_id ) 
+    $sql =  $db->prepare( " INSERT INTO posts ( title , body ,  user_id ) 
                VALUES (:title,:body,:user_id)" );
     $bindedParams = array( ":title" => $title , ":body" => $body ,":user_id" => $user_id );
   
@@ -50,7 +56,7 @@ if( isset($_SESSION['id']) ){
                     <label>Title</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
-                        <span class="input-group-text">
+                        
                           <!-- <i class="nc-icon nc-single-02"></i> -->
                         </span>
                       </div>
@@ -99,11 +105,7 @@ if( isset($_SESSION['id']) ){
   
   
       $_SESSION['messege']  = "post has been updated Sussecfully";
-      if( $foundPost['user_id'] == $id ){
-        header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/home.php?action=view');
-      }else{
-        header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/otherPosts.php?action=view');
-      }
+      header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/home.php?action=view');
       
     }else{
       echo  $_SESSION['messege'] = "something went wrong";
@@ -124,7 +126,7 @@ if( isset($_SESSION['id']) ){
                     <label>Title</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
-                        <span class="input-group-text">
+                        
                           <!-- <i class="nc-icon nc-single-02"></i> -->
                         </span>
                       </div>

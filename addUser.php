@@ -50,7 +50,7 @@ require_once("head.php");
                   <label>Username</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text">
+                      
                         <!-- <i class="nc-icon nc-single-02"></i> -->
                       </span>
                     </div>
@@ -61,7 +61,7 @@ require_once("head.php");
                   <label>Password</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text">
+                      
                         <!-- <i class="nc-icon nc-email-85"></i> -->
                       </span>
                     </div>

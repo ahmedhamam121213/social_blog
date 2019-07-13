@@ -90,11 +90,10 @@ require_once("head.php");
                     border-color: #fff;
                     font-weight: normal;
                     color: #fff;
-                    width: 80%;
-                    text-align:left;
-                    font-size: 15px;'>";
-                    echo "<img src='https://images.pexels.com/photos/159599/baby-eyes-learning-watch-159599.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' class='img-comment'>";          
-                    echo $lastComment. "</p>";
+                    width: 60%;
+                    font-size: 15px;'>" .
+                              
+                    $lastComment. "</p>";
                     echo "<span class='down-arrow'></span>";
                     echo "</div>";
                   }
@@ -119,8 +118,8 @@ require_once("head.php");
                     <div class="input-group">
                     <input type="text" class="form-control" name="title" placeholder="Write a Comment">
                     <div class="input-group-append">
-                <span class="input-group-text"><i class="fa fa-comments" aria-hidden="true"></i></span>
-              </div>
+                      <i class="fa fa-comments" aria-hidden="true"></i></span>
+                    </div>
                     <input type="hidden" class="form-control" name="post_id" value="<?php echo $post['id'];  ?>" >
                     <input type="hidden" class="form-control" name="user_id" value="<?php echo $_SESSION['id'];  ?>" >
                     <input type="submit" name="add-comment" value="submit" style="display:none">

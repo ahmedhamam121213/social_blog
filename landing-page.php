@@ -258,7 +258,7 @@ The above copyright notice and this permission notice shall be included in all c
                   <label>Name</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text">
+                      
                         <i class="nc-icon nc-single-02"></i>
                       </span>
                     </div>
@@ -269,7 +269,7 @@ The above copyright notice and this permission notice shall be included in all c
                   <label>Email</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text">
+                      
                         <i class="nc-icon nc-email-85"></i>
                       </span>
                     </div>

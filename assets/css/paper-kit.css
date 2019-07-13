@@ -8162,4 +8162,52 @@ License - nucleoapp.com/license/
 }
 .card{
   box-shadow: 0px 12px 19px -7px rgba(0, 0, 0, 0.3);
+  margin-bottom: 40px;
+}
+.card a:not(.btn){
+      padding: 0 7% 0 0;
+}
+.comment-number{
+  padding: 0;
+    color: #000 !important;
+    font-size: 11px;
+    font-weight: normal !important;
+}
+.new_anchor_style{
+    border-top: 1px solid #ddd;
+    padding: 10px 20px !important;
+}
+.new_anchor_style a{
+   color: #000 !important;
+    font-weight: normal !important;
+}
+
+.card .comment-container{
+  padding-bottom: 0;
+}
+@media (max-width: 768px) {
+  .btn.btn-primary{ display: block; }
+}
+.down-arrow {
+  border-color: #51cbce transparent;
+    border-style: solid;
+    border-width: 13px 14px 0px 14px;
+    height: 0px;
+    width: 0px;
+    position: absolute;
+    top: 46px;
+    left: 63%;
+    color: #fff;
+}
+.input-group>.form-control{
+  border-left: 1px solid #DDDDDD;
+  border-top-left-radius: 4px !important ;
+    border-bottom-left-radius: 4px !important;
+}
+
+.img-comment{
+      width: 35px !important;
+    height: 35px !important;
+    border-radius: 50% !important;
+    margin-right: 10px;
 }

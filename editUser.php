@@ -40,8 +40,8 @@ require_once("head.php");
   <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('assets/img/fabio-mangione.jpg');">
     <div class="filter"></div>
   </div>
-<!--start add user-->
-  <?php if( isset( $_GET['action'] )  && $_GET['action']= 'edit' && isset( $_GET['id'] ) ){ ?>
+<!--start edit user-->
+  <?php if( isset( $_GET['action'] )  && $_GET['action'] == 'edit' && isset( $_GET['id'] ) ){ ?>
 
 
   <div class="section profile-content"  style="background:#fff">
@@ -66,7 +66,7 @@ require_once("head.php");
                   <label>Username</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text">
+                      
                         <!-- <i class="nc-icon nc-single-02"></i> -->
                       </span>
                     </div>
@@ -77,7 +77,7 @@ require_once("head.php");
                   <label>Password</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text">
+                      
                         <!-- <i class="nc-icon nc-email-85"></i> -->
                       </span>
                     </div>
@@ -100,7 +100,68 @@ require_once("head.php");
     </div>
   </div>
   <?php } ?>
-<!--end add user-->
+<!--end edit user-->
+
+<!--start view user-->
+<?php if( isset( $_GET['action'] )  && $_GET['action'] == 'view' && isset( $_GET['id'] ) ){ ?>
+
+
+<div class="section profile-content"  style="background:#fff">
+  <div class="container">
+    <div class="owner">
+      <div class="avatar">
+        <img src="<?php  if( isset($foundUser['image_url']) ){ echo $foundUser['image_url']; } ?>" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+      </div>
+    </div>
+    
+  </div>
+</div>
+<div class="main">
+  <div class="section landing-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+          <h2 class="text-center">View User</h2>
+          <form class="contact-form" method="post" enctype="multipart/form-data">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Username</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    
+                      <!-- <i class="nc-icon nc-single-02"></i> -->
+                    </span>
+                  </div>
+                  <input disabled type="text" name="username" class="form-control" placeholder="Username" required value="<?php  if( isset($foundUser['username']) ){ echo $foundUser['username']; } ?>">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label>Password</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    
+                      <!-- <i class="nc-icon nc-email-85"></i> -->
+                    </span>
+                  </div>
+                  <input disabled type="text" name="password" class="form-control" placeholder="Password" required value="<?php  if( isset($foundUser['password']) ){ echo $foundUser['password']; } ?>">
+                </div>
+              </div>
+            </div>
+            <label>Image Url</label>
+            <textarea disabled class="form-control" name="image_url" rows="4" placeholder="Type Your Image Url" required ><?php  if( isset($foundUser['image_url']) ){ echo $foundUser['image_url']; } ?></textarea>
+            <div class="row">
+              <div class="ml-auto mr-auto">
+                
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<?php } ?>
+<!--end view user-->
 
 <?php require_once("footer.php");     
 }else{
