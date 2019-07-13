@@ -64,9 +64,17 @@ require_once("head.php");
             <div class="card" >
               <img class="card-img-top" src="<?php echo $post['picture_url']; ?>" alt="Card image cap">
               <div class="card-body comment-container">
-                <h5 style="font-weight:500" class="card-title"><?php echo $post['title']; ?></h5>
+                <h5 style="font-weight:500" class="card-title"><?php echo $post['title'];
+               
+                  if( strlen( $post['body'] ) > 70 ){
+                    $body = substr( $post['body'] ,0 , 70 ) . '..........' ; 
+                      
+                  }else{
+                    $body = $post['body'];
+                  } ?></h5>
                 
-                <p class="card-text"><?php echo $post['body']; ?></p>
+                
+                <p class="card-text"><?php echo $body  ; ?></p>
                   <!--start require comments.php-->
                   <?php require_once("comments.php"); ?>
                   <!--end require comments.php-->
@@ -85,6 +93,7 @@ require_once("head.php");
                        $lastComment = substr( $lastComment , 0 , -15 ) . '...' ; 
                         
                     }
+                    
                     $lastId = $comments[count($comments) - 1]['user_id'];
                     //start fetch image url of the comment of user
                    $sql = $db->prepare("SELECT users.image_url FROM users JOIN comments ON comments.user_id = users.id WHERE comments.title = \"$lastComment\" AND comments.user_id = $lastId " );
