@@ -8211,3 +8211,6 @@ License - nucleoapp.com/license/
     border-radius: 50% !important;
     margin-right: 10px;
 }
+.users_list a{
+    font-weight: bold;
+}

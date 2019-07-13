@@ -65,7 +65,7 @@ $users = $sql->fetchAll() ;
 <a class="btn btn-primary" href="addUser.php?action=add">Add User</a>
 <br><br>
 <!--start table-->
-<table class="table">
+<table class="table users_list">
   <thead>
     <tr>
       <!-- <th scope="col">id</th> -->
