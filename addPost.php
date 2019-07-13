@@ -16,10 +16,11 @@ $foundUser =  array_shift($foundUser);
   if(  isset( $_POST['Add-post'] )  ){
     $title = $_POST['title'];
     $body = $_POST['body'];
+    $picture_url = $_POST['picture_url'];  
   
-    $sql =  $db->prepare( " INSERT INTO posts ( title , body ,  user_id ) 
-               VALUES (:title,:body,:user_id)" );
-    $bindedParams = array( ":title" => $title , ":body" => $body ,":user_id" => $user_id );
+    $sql =  $db->prepare( " INSERT INTO posts ( title , body ,  user_id , picture_url ) 
+               VALUES (:title,:body,:user_id , :picture_url )" );
+    $bindedParams = array( ":title" => $title , ":body" => $body ,":user_id" => $user_id , ":picture_url" => $picture_url );
   
     if( $sql->execute( $bindedParams ) ){
       $_SESSION['messege']  = "Post Has Been Saved Succesfully";
@@ -66,6 +67,10 @@ $foundUser =  array_shift($foundUser);
                 </div>
                 <label>Body</label>
                 <textarea class="form-control" name="body" rows="4" placeholder="Type Your description" required></textarea>
+                
+                <label>Pictue Url</label>
+                <textarea class="form-control" name="picture_url" rows="4" placeholder="Type Your Picture URL" required></textarea>
+                
                 <div class="row">
                   <div class="ml-auto mr-auto">
                     <input type="submit" name="Add-post" class="btn btn-danger btn-lg btn-fill" value="Submit">
@@ -94,10 +99,11 @@ $foundUser =  array_shift($foundUser);
     //start if user click update
   if( isset($_POST['edit-post']) ){
   
-    $sql =  $db->prepare( " UPDATE posts SET title = :title , body = :body WHERE id = :id");
+    $sql =  $db->prepare( " UPDATE posts SET title = :title , body = :body , picture_url = :picture_url WHERE id = :id");
     $bindedParams = array( ":title" => $_POST['title'] ,
                            ":body" => $_POST['body'] ,
-                           ":id" => $id );
+                          ":picture_url" => $_POST['picture_url'],
+                           ":id" => $id ,  );
     $sql = $sql->execute( $bindedParams ) ;
   
     //insert data into data base
@@ -136,6 +142,9 @@ $foundUser =  array_shift($foundUser);
                 </div>
                 <label>Body</label>
                 <textarea class="form-control" name="body" rows="4" placeholder="Type Your description" required><?php if( isset( $foundPost['body'] ) ){ echo $foundPost['body']; } ?></textarea>
+                
+                <label>Picture URL</label>
+                <textarea class="form-control" name="picture_url" rows="4" placeholder="Type Your Picture URL" required><?php if( isset( $foundPost['picture_url'] ) ){ echo $foundPost['picture_url']; } ?></textarea>
                 <div class="row">
                   <div class="ml-auto mr-auto">
                     <input type="submit" name="edit-post" class="btn btn-danger btn-lg btn-fill" value="Submit">
