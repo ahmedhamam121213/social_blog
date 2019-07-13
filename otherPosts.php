@@ -90,10 +90,11 @@ require_once("head.php");
                     border-color: #fff;
                     font-weight: normal;
                     color: #fff;
-                    width: 60%;
-                    font-size: 15px;'>" .
-                              
-                    $lastComment. "</p>";
+                    width: 80%;
+                    text-align:left;
+                    font-size: 15px;'>";
+                    echo "<img src='https://images.pexels.com/photos/159599/baby-eyes-learning-watch-159599.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' class='img-comment'>";          
+                    echo $lastComment. "</p>";
                     echo "<span class='down-arrow'></span>";
                     echo "</div>";
                   }
