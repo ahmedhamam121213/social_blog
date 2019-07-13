@@ -83,7 +83,7 @@ $users = $sql->fetchAll() ;
        // echo "<td>".$employee->id."</td>" ;
        echo "<td>".$user['id']."</td>" ;
        echo "<td>".$user['username']."</td>" ;
-       echo "<td><a href='editUser.php?action=edit&id=".$user['id']."'>edit</a>
+       echo "<td><a href='editUser.php?action=view&id=".$user['id']."'>view&nbsp;&nbsp;</a><a href='editUser.php?action=edit&id=".$user['id']."'>edit&nbsp;&nbsp;</a>
        <a href='?action=delete&id=".$user['id']."' onclick=\"return confirm('Are you sure you want to delete this item?');\">delete</a>
        </td>" ;
       ?>
