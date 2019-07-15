@@ -1,31 +1,35 @@
 <?php 
+ob_start();
 session_start();
 if( isset($_SESSION['id']) ){
 
 
   $user_id = $_SESSION['id'];
   //connection of data base
-  $db = new PDO("mysql:host=localhost;dbname=social_blog", "root", "" , array(PDO::MYSQL_ATTR_INIT_COMMAND =>  "SET NAMES 'UTF8'") );
-  //fetch info of logged user
+  require_once("con.php");  //fetch info of logged user
 
 $sql =  $db->prepare(" SELECT * from users WHERE id = " . $_SESSION['id'] );
 $myResult = $sql->execute();
 $foundUser = $sql->fetchAll() ;
 $foundUser =  array_shift($foundUser);
   //add user
-  if(  isset( $_POST['Add-post'] )  ){
+  if(  isset( $_POST['add-post'] )  ){
     $title = $_POST['title'];
     $body = $_POST['body'];
     $picture_url = $_POST['picture_url'];  
   
     $sql =  $db->prepare( " INSERT INTO posts ( title , body ,  user_id , picture_url ) 
-               VALUES (:title,:body,:user_id , :picture_url )" );
+              VALUES (:title,:body,:user_id , :picture_url )" );
+     
+             
     $bindedParams = array( ":title" => $title , ":body" => $body ,":user_id" => $user_id , ":picture_url" => $picture_url );
+    
   
     if( $sql->execute( $bindedParams ) ){
-      $_SESSION['messege']  = "Post Has Been Saved Succesfully";
-      header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/home.php?action=view');
-    }         
+       $_SESSION['messege']  = "Post Has Been Saved Succesfully";
+      header('Location:home.php?action=view');
+    }   
+    
   }
   require_once("head.php");
   ?>
@@ -33,9 +37,8 @@ $foundUser =  array_shift($foundUser);
       <div class="filter"></div>
     </div>
   <!--start add post-->
-    <?php if( isset( $_GET['action'] )  && $_GET['action'] == 'add' ){ ?>
-  
-    <div class="section profile-content"  style="background:#fff">
+<?php if( isset( $_GET['action'] )  && $_GET['action'] == 'add' ){ ?>
+  <div class="section profile-content"  style="background:#fff">
       <div class="container">
         <div class="owner">
           <div class="avatar">
@@ -69,11 +72,11 @@ $foundUser =  array_shift($foundUser);
                 <textarea class="form-control" name="body" rows="4" placeholder="Type Your description" required></textarea>
                 
                 <label>Pictue Url</label>
-                <textarea class="form-control" name="picture_url" rows="4" placeholder="Type Your Picture URL" required></textarea>
+                <textarea class="form-control" name="picture_url" rows="4" placeholder="Type Your Picture URL" required>https://images.pexels.com/photos/373076/pexels-photo-373076.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500</textarea>
                 
                 <div class="row">
                   <div class="ml-auto mr-auto">
-                    <input type="submit" name="Add-post" class="btn btn-danger btn-lg btn-fill" value="Submit">
+                    <input type="submit" name="add-post" class="btn btn-danger btn-lg btn-fill" value="Submit">
                     
                   </div>
                 </div>
@@ -87,9 +90,9 @@ $foundUser =  array_shift($foundUser);
   <!--end add post-->
   
   <!--start edit post-->
-  <?php if( isset( $_GET['action'] )  && $_GET['action'] == 'edit' && isset( $_GET['id'] ) ){ ?>
-    <!--start fetch data by id-->
-    <?php 
+<?php if( isset( $_GET['action'] )  && $_GET['action'] == 'edit' && isset( $_GET['id'] ) ){ ?>
+<!--start fetch data by id-->
+<?php 
     $id = $_GET['id'];
     $sql =  $db->prepare(" SELECT * from posts WHERE id = \"$id\"  ");
     $myResult = $sql->execute();
@@ -109,12 +112,10 @@ $foundUser =  array_shift($foundUser);
     //insert data into data base
     if( $sql ){
   
-  
-      $_SESSION['messege']  = "post has been updated Sussecfully";
-      header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/home.php?action=view');
-      
-    }else{
-      echo  $_SESSION['messege'] = "something went wrong";
+$_SESSION['messege']  = "Post Has Been Saved Succesfully";
+header('Location:home.php?action=view');
+}else{
+      $_SESSION['messege'] = "something went wrong";
     }
   }
   //end if user click update
@@ -126,7 +127,7 @@ $foundUser =  array_shift($foundUser);
           <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
               <h2 class="text-center">Edit Post</h2>
-              <form class="contact-form" method="post" enctype="multipart/form-data">
+              <form class="contact-form" method="post" enctype="multipart/form-data" >
                 <div class="row">
                   <div class="col-md-12">
                     <label>Title</label>
@@ -157,19 +158,19 @@ $foundUser =  array_shift($foundUser);
         </div>
       </div>
     </div>
-  <?php } ?>
+<?php } ?>
   <!--end edit post-->
 
   <!--start view post-->
-  <?php if( isset( $_GET['action'] )  && $_GET['action'] == 'view' && isset( $_GET['id'] ) ){ ?>
+<?php if( isset( $_GET['action'] )  && $_GET['action'] == 'view' && isset( $_GET['id'] ) ){ ?>
     <!--start fetch data by id-->
-    <?php 
+<?php 
     $id = $_GET['id'];
     $sql =  $db->prepare(" SELECT * from posts WHERE id = \"$id\"  ");
     $myResult = $sql->execute();
     $foundPost = $sql->fetchAll() ;
     $foundPost =  array_shift($foundPost);
-    ?>
+?>
     <!--end fetch data by id-->
     <div class="main">
       <div class="section landing-section">
@@ -203,10 +204,12 @@ $foundUser =  array_shift($foundUser);
         </div>
       </div>
     </div>
-  <?php } ?>
+<?php } ?>
   <!--end view post-->
-  <?php require_once("footer.php"); 
+<?php require_once("footer.php"); 
 
 }else{
-  header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/login.php ');
+header('Location:index.php');
 }
+ob_end_flush();
+?>

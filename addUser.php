@@ -1,11 +1,9 @@
-
 <?php 
 session_start();
 if( isset($_SESSION['id']) ){
 
 //connection of data base
-$db = new PDO("mysql:host=localhost;dbname=social_blog", "root", "" , array(PDO::MYSQL_ATTR_INIT_COMMAND =>  "SET NAMES 'UTF8'") );
-
+require_once("con.php");
 //fetch info of logged user
 $sql =  $db->prepare(" SELECT * from users WHERE id = " . $_SESSION['id'] );
 $myResult = $sql->execute();
@@ -24,7 +22,7 @@ if(  isset( $_POST['Add-user'] )  ){
 
   if( $sql->execute( $bindedParams ) ){
     $_SESSION['messege']  = "User Has Been Saved Succesfully";
-    header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/user.php');
+    header('Location:user.php');
   }         
 }
 require_once("head.php");
@@ -77,7 +75,7 @@ require_once("head.php");
                 </div>
               </div>
               <label>Image Url</label>
-              <textarea class="form-control" name="image_url" rows="4" placeholder="Type Your Image Url" required></textarea>
+              <textarea class="form-control" name="image_url" rows="4" placeholder="Type Your Image Url" required>https://images.pexels.com/photos/266004/pexels-photo-266004.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500</textarea>
               <div class="row">
                 <div class="ml-auto mr-auto">
                   <input type="submit" name="Add-user" class="btn btn-danger btn-lg btn-fill" value="Submit">
@@ -101,5 +99,5 @@ require_once("head.php");
 
 <?php require_once("footer.php");
 }else{
-header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/login.php ');
+header('Location:index.php ');
 }

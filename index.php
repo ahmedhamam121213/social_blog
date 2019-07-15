@@ -1,9 +1,8 @@
-
-  <?php 
+<?php 
   session_start();
   //connection of data base
-  $db = new PDO("mysql:host=localhost;dbname=social_blog", "root", "" , array(PDO::MYSQL_ATTR_INIT_COMMAND =>  "SET NAMES 'UTF8'") );
- if(  isset( $_POST['submit'] )  ){
+  require_once("con.php");
+  if(  isset( $_POST['submit'] )  ){
 
   $username = $_POST['username'];
 $password = $_POST['password']; 
@@ -16,7 +15,7 @@ if( $count != 0 ){
   $foundUser = $sql->fetchAll() ;
   $foundUser =  array_shift($foundUser);
   $_SESSION['id'] = $foundUser['id'];
-  header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/home.php?action=view&id=' . $_SESSION['id']);
+  header('Location:home.php?action=view&id=' . $_SESSION['id']);
  }else{
    $errorMsg = "Invalid Login";
  }
@@ -50,7 +49,7 @@ if( $count != 0 ){
 
   <div class="page-header" style="background-image: url('https://images.pexels.com/photos/1559041/pexels-photo-1559041.jpeg?cs=srgb&dl=background-beverage-blank-1559041.jpg&fm=jpg');background-size: cover">
     <div class="filter"></div>
-    <div class="container">
+    <div class="container" style="margin-top:0">
       <div class="row">
         <div class="col-lg-4 ml-auto mr-auto">
           <div class="card card-register">

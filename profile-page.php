@@ -1,11 +1,9 @@
-
 <?php 
 session_start();
 if( isset($_SESSION['id']) ){
 
 //connection of data base
-$db = new PDO("mysql:host=localhost;dbname=social_blog", "root", "" , array(PDO::MYSQL_ATTR_INIT_COMMAND =>  "SET NAMES 'UTF8'") );
-
+require_once("con.php");
 //fetch info of logged user
 
 $sql =  $db->prepare(" SELECT * from users WHERE id = " . $_SESSION['id'] );
@@ -159,7 +157,7 @@ require_once("head.php");
         $sql =$db->prepare(" DELETE FROM posts WHERE id = :id ");
         $sql->execute( array( ":id" => $id ) );
         $_SESSION['messege']  = "post has been deleted successfully";
-        header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/home.php?action=view');
+        header('Location:home.php?action=view');
     }} ?>  
     <!--start edit blog post-->
 
@@ -172,5 +170,5 @@ require_once("head.php");
 <?php require_once("footer.php");
 
 }else{
-header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/login.php ');
+header('Location:index.php ');
 }

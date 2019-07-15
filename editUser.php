@@ -1,11 +1,9 @@
-
 <?php 
 session_start();
 if( isset($_SESSION['id']) ){
 
 //connection of data base
-$db = new PDO("mysql:host=localhost;dbname=social_blog", "root", "" , array(PDO::MYSQL_ATTR_INIT_COMMAND =>  "SET NAMES 'UTF8'") );
-//fetch user data by id
+require_once("con.php");//fetch user data by id
 $id = $_GET['id'];
 $sql =  $db->prepare(" SELECT * from users WHERE id = \"$id\"  ");
 $myResult = $sql->execute();
@@ -26,7 +24,7 @@ if( isset($_POST['edit-user']) ){
 
 
     $_SESSION['messege']  = "user has been updated Sussecfully";
-    header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/user.php');
+    header('Location:user.php');
   }else{
     echo  $_SESSION['messege'] = "something went wrong";
   }
@@ -165,5 +163,5 @@ require_once("head.php");
 
 <?php require_once("footer.php");     
 }else{
-header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/login.php ');
+header('Location:index.php ');
 }

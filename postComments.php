@@ -5,7 +5,7 @@ if( isset($_SESSION['id']) ){
 
   $user_id = $_SESSION['id'];
   //connection of data base
-  $db = new PDO("mysql:host=localhost;dbname=social_blog", "root", "" , array(PDO::MYSQL_ATTR_INIT_COMMAND =>  "SET NAMES 'UTF8'") );
+  require_once("con.php");
   //fetch user details
   $sql =  $db->prepare(" SELECT * from users WHERE id = " . $_SESSION['id'] );
   $myResult = $sql->execute();
@@ -90,7 +90,7 @@ if( isset($_SESSION['id']) ){
       <!--start profile side-->
       <?php
       
-      $sql = $db->prepare(" SELECT users.image_url as image , users.username as user FROM users JOIN posts ON posts.user_id = users.id 
+      $sql = $db->prepare(" SELECT users.image_url as image , users.username as user , users.id as id FROM users JOIN posts ON posts.user_id = users.id 
         WHERE posts.id = \"$postId\" " );
     $myResult = $sql->execute();
     $foundProfile = $sql->fetchAll() ;
@@ -104,7 +104,7 @@ if( isset($_SESSION['id']) ){
               </div>
               <h4><b><?php echo $foundProfile['user']; ?></b></h4>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem facilis sunt repellendus excepturi beatae porro debitis voluptate nulla quo veniam fuga sit molestias minus.</p>
-              <a href="#" class="btn btn-primary" >View Profile</a>
+              <a href="editUser.php?action=view&id=<?php echo $foundProfile['id']; ?>" class="btn btn-primary" >View Profile</a>
            </div>
       </div>  
       <!--end profile side--> 
@@ -124,5 +124,5 @@ if( isset($_SESSION['id']) ){
   <?php require_once("footer.php"); 
 
 }else{
-  header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/login.php ');
+  header('Location:index.php ');
 }

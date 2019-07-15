@@ -1,11 +1,10 @@
-
 <?php 
+ob_start();
 session_start();
 if( isset( $_SESSION['id'] ) ){
 
 //connection of data base
-$db = new PDO("mysql:host=localhost;dbname=social_blog", "root", "" , array(PDO::MYSQL_ATTR_INIT_COMMAND =>  "SET NAMES 'UTF8'") );
-
+require_once("con.php");
 //fetch info of logged user
 $sql =  $db->prepare(" SELECT * from users WHERE id = " . $_SESSION['id'] );
 $myResult = $sql->execute();
@@ -21,7 +20,7 @@ if( isset( $_GET['action'] )  && $_GET['action']= 'delete' && isset( $_GET['id']
     $sql =$db->prepare(" DELETE FROM users WHERE id = :id ");
     $sql->execute( array( ":id" => $id ) );
     $_SESSION['messege']  = "user has been deleted successfully";
-    header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/user.php');
+    header('Location:user.php');
     
 
   }
@@ -106,5 +105,7 @@ $users = $sql->fetchAll() ;
   <?php require_once("footer.php");
 
 }else{
-  header('Location:http://'.$_SERVER['HTTP_HOST'].'/social_blog/login.php ');
+  header('Location:index.php ');
 }
+ob_end_flush();
+?>
