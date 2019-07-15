@@ -52,7 +52,7 @@ require_once("head.php");
       <?php
       if( isset( $foundUser['id'] ) ){
         $id = $foundUser['id']; 
-        $sql =  $db->prepare(" SELECT * from posts WHERE user_id != \"$id\"  ");
+        $sql =  $db->prepare(" SELECT * from posts WHERE user_id != \"$id\" ORDER BY id DESC ");
         $myResult = $sql->execute();
         $postsResult = $sql->fetchAll() ;?>
           

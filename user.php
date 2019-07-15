@@ -41,7 +41,7 @@ require_once("head.php");
       </div>
 <!--start fetch all users-->
 <?php
-$sql =  $db->prepare(" SELECT * from users");
+$sql =  $db->prepare(" SELECT * from users ORDER BY id DESC");
 $myResult = $sql->execute();
 $users = $sql->fetchAll() ;
 ?>
